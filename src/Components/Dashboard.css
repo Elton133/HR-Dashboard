@@ -1,0 +1,29 @@
+.dashboard{
+
+}
+/* span{
+    background-color: white;
+    border-radius: 12px;
+    padding: 1em;
+} */
+.cards {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+    color: black;
+    width: 253px;
+    height: auto;
+    border-radius: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+    position: relative;
+    padding: 20px;
+  }
+  .card-container{
+    display: flex;
+  }
+  @media(max-width: 768px){
+    .card-container{
+      flex-direction: column;
+    }
+  }
