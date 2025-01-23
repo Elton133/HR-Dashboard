@@ -98,14 +98,9 @@ const AdminDashboard = () => {
   return (
     <div className="container">
       <div><Toaster position="top-center"/></div>
-      
-      {/* Navigation Component */}
-
 
       {/* Main Content */}
       <div className={`main ${isNavActive ? 'active' : ''}`}>
-
-
         {/* Cards */}
         <div className="cardBox">
           {cardData.map((card, index) => (
@@ -158,7 +153,7 @@ const AdminDashboard = () => {
               </div>
             )}
           </div>
-
+                
           {/* Recent Customers */}
           <div className="recentCustomers">
             <div className="cardHeader">

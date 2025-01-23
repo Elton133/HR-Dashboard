@@ -22,7 +22,7 @@ function App() {
     };
   return (
     <>
-    <Navigation isActive={isNavActive} />
+    <Navigation isActive={!isNavActive} />
     <div className="topbar">
           <div className="toggle" onClick={toggleNavigation}>
             <SidebarOpen />
