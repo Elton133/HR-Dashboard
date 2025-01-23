@@ -138,7 +138,7 @@
 
 .topbar {
   width: 100%;
-  height: 60px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -155,6 +155,7 @@
   font-size: 2.5rem;
   cursor: pointer;
   z-index: 10;
+  color:rgb(106, 106, 106);
 }
 
 .search label {
@@ -167,7 +168,7 @@
   height: 40px;
   border-radius: 20px 0 0 20px; 
   padding: 5px 20px;
-  font-size: 18px;
+  font-size: 14px;
   outline: none;
   border: 1px solid var(--black2);
   border-right: none; 
@@ -180,17 +181,13 @@
 .search-btn {
   height: 40px;
   padding: 0 20px;
-  background: var(--blue);
+  background-image: url("../assets/bgg.png");
+  background-size: cover;
   color: var(--white);
   border: 1px solid var(--blue);
   border-radius: 0 20px 20px 0; 
   cursor: pointer;
-}
-
-.search-btn:hover {
-  background: var(--white);
-  color: var(--blue);
-  border: 1px solid var(--blue);
+  font-size: 14px;
 }
 
 .user {

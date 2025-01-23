@@ -1,6 +1,5 @@
 import React from 'react'
 import 'boxicons/css/boxicons.min.css';
-
 import { useState } from 'react'
 import './AddEmployee.css'
 import toast, { Toaster } from 'react-hot-toast';
@@ -48,9 +47,12 @@ const AddEmployee = () => {
     <div><Toaster position="top-center"/></div>
     <div className='header'>
       <h3>Add Employee</h3>
-    <p>Create a new contract for employee</p></div>
+      <p>Create a new contract for employee</p>
+    </div>
     
     <form className="add-employee-form" onSubmit={handleSubmit}>
+    
+
       <p>Personal Detail <i className='bx bx-user'></i></p>
       <div className='input-wrapper'>
         <input className="input-box" type="text" name='name' placeholder='Enter Full Name' 
@@ -82,7 +84,7 @@ const AddEmployee = () => {
   value={employee.department || ""}
   onChange={handleDepartmentChange}
   required
->
+  >
   <option value="" disabled>
     Choose a department 
   </option>
