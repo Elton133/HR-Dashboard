@@ -21,7 +21,7 @@
 /* =============== Navigation ================ */
 .navigation {
   position: fixed;
-  width: 300px;
+  width: 250px;
   height: 100%;
   background-image: url("../assets/bgg.png");
   background-size: contain;
@@ -477,7 +477,7 @@
     z-index: 1000;
   }
   .navigation.active {
-    width: 100vw;
+    width: 80vw;
     left: 0;
   }
   .toggle {
