@@ -126,14 +126,7 @@ const AdminDashboard = () => {
               <h2>Employees</h2>
               <button 
                 onClick={() => navigate('/add-employee')}
-                style={{
-                  padding: '8px 16px',
-                  backgroundColor: '#287bff',
-                  color: 'white',
-                  border: 'none',
-                  borderRadius: '5px',
-                  cursor: 'pointer'
-                }}
+                className='get-started'
               >
                 Add Employee
               </button>
