@@ -4,27 +4,32 @@ import {
   Users,
   MessageCircle,
   DollarSign,
-  SidebarOpen,
   BuildingIcon
 } from 'lucide-react';
 import wavy from '../assets/bgg.png';
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from "react-router-dom";
 
 const AdminDashboard = () => {
   const [totalEmployees, setTotalEmployees] = useState(0);
-  const [isNavActive, setIsNavActive] = useState(true);
   const [employees, setEmployees] = useState([]); 
   const [selectedEmployee, setSelectedEmployee] = useState(null);
+  const navigate = useNavigate();
 
   const handleEmployeeClick = (emp) => {
     setSelectedEmployee(emp);
   };
 
   useEffect(() => {
-    const storedEmployees = JSON.parse(localStorage.getItem("employees")) || [];
-    setEmployees(storedEmployees);
-    setTotalEmployees(storedEmployees.length); 
+      const storedEmployees = JSON.parse(localStorage.getItem("employees")) || [];
+      setEmployees(storedEmployees);
+      setTotalEmployees(storedEmployees.length);
   }, []);
+
+  
+  const handleEdit = (employee) => {
+    navigate('/add-employee', { state: { employee } });
+  };
 
   const countByDepartment = {};
   employees.forEach((employee) => {
@@ -33,15 +38,11 @@ const AdminDashboard = () => {
   });
 
   const cardData = [
-    { title: 'Total Employees', value: totalEmployees , icon: <Users /> },
+    { title: 'Total Employees', value: totalEmployees, icon: <Users /> },
     { title: 'Departments', value: Object.keys(countByDepartment).length, icon: <BuildingIcon /> },
     { title: 'Organization', value: '284', icon: <MessageCircle /> },
     { title: 'Earning', value: '$7,842', icon: <DollarSign /> },
   ];
-
-  const toggleNavigation = () => {
-    setIsNavActive(!isNavActive);
-  };
 
   const deleteEmployee = (index) => {
     const updatedEmployees = employees.filter((_, empIndex) => empIndex !== index);
@@ -68,6 +69,7 @@ const AdminDashboard = () => {
                 }}
                 onClick={() => {
                   deleteEmployee(index);
+                  setSelectedEmployee(null);
                   toast.dismiss(t.id);
                   toast.success("Employee deleted successfully");
                 }}
@@ -100,7 +102,7 @@ const AdminDashboard = () => {
       <div><Toaster position="top-center"/></div>
 
       {/* Main Content */}
-      <div className={`main ${isNavActive ? 'active' : ''}`}>
+      <div className="main active">
         {/* Cards */}
         <div className="cardBox">
           {cardData.map((card, index) => (
@@ -118,10 +120,23 @@ const AdminDashboard = () => {
 
         {/* Details Section */}
         <div className="details">
-          {/* Recent Orders */}
+          {/* Employee List */}
           <div className="recentOrders">
             <div className="cardHeader">
               <h2>Employees</h2>
+              <button 
+                onClick={() => navigate('/add-employee')}
+                style={{
+                  padding: '8px 16px',
+                  backgroundColor: '#287bff',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer'
+                }}
+              >
+                Add Employee
+              </button>
             </div>
             
             {employees.length > 0 ? (
@@ -137,7 +152,12 @@ const AdminDashboard = () => {
                 </thead>
                 <tbody>
                   {employees.map((emp, index) => (
-                    <tr key={index} onClick={() => handleEmployeeClick(emp)}>
+                    <tr 
+                      key={index} 
+                      onClick={() => handleEmployeeClick(emp)}
+                      style={{ cursor: 'pointer' }}
+                      className={selectedEmployee === emp ? 'selected-row' : ''}
+                    >
                       <td>{emp.name}</td>
                       <td>{emp.position}</td>
                       <td>{emp.email}</td>
@@ -154,10 +174,10 @@ const AdminDashboard = () => {
             )}
           </div>
                 
-          {/* Recent Customers */}
+          {/* Employee Details Card */}
           <div className="recentCustomers">
             <div className="cardHeader">
-              <p className='employee-card-title'>Recent Employees</p>
+              <p className='employee-card-title'>Employee Details</p>
             </div>
             <table>
               {selectedEmployee ? (
@@ -176,7 +196,7 @@ const AdminDashboard = () => {
                       <b>Department</b>: {selectedEmployee.department}
                     </p>
                     <p className="info">
-                      <b>StartDate</b>: {selectedEmployee.startDate}
+                      <b>Start Date</b>: {selectedEmployee.startDate}
                     </p>
                   </div>
                   <div className="links">
@@ -213,12 +233,12 @@ const AdminDashboard = () => {
                     </a>
                   </div>
                   <div className='edit-delete-btn'>
-                    <button>Edit</button>
+                    <button onClick={() => handleEdit(selectedEmployee)}>Edit</button>
                     <button onClick={handleDelete}>Delete</button>
                   </div>
                 </div>
               ) : (
-                <p className='employee-card-title'>No employee selected</p>
+                <p className='employee-card-title'>Select an employee to view details</p>
               )}
             </table>
           </div>
