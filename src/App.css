@@ -1,0 +1,48 @@
+.search {
+    position: relative;  /* Ensure suggestions are positioned relative to the search box */
+  }
+
+  .suggestions {
+    position: absolute;
+    top: 100%;   /* Position the dropdown just below the input field */
+    left: 0;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-top: none;
+    max-height: 200px;   /* Set a max height for the dropdown */
+    overflow-y: auto;    /* Enable scrolling if there are too many suggestions */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 10;         /* Ensure it displays above other elements */
+    border-radius: 4px;
+    margin-top: 5px;      /* Slight gap between input and suggestions */
+  }
+  
+  .suggestion-item {
+    padding: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .suggestion-item:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .suggestion-item:active {
+    background-color: #e0e0e0; /* Highlight when the suggestion is clicked */
+  }
+  
+  .search-btn {
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+  }
+  
+  .search-btn:hover {
+    background-color: #0056b3;
+  }
+  

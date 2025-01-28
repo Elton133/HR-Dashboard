@@ -10,26 +10,20 @@ import wavy from '../assets/bgg.png';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from "react-router-dom";
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ 
+  employees, 
+  setEmployees, 
+  selectedEmployee, 
+  setSelectedEmployee, 
+  handleEmployeeClick,
+  isNavActive 
+}) => {
   const [totalEmployees, setTotalEmployees] = useState(0);
-  const [employees, setEmployees] = useState([]); 
-  const [selectedEmployee, setSelectedEmployee] = useState(null);
   const navigate = useNavigate();
 
-  const handleEmployeeClick = (emp) => {
-    setSelectedEmployee(emp);
-  };
-
   useEffect(() => {
-      const storedEmployees = JSON.parse(localStorage.getItem("employees")) || [];
-      setEmployees(storedEmployees);
-      setTotalEmployees(storedEmployees.length);
-  }, []);
-
-  
-  const handleEdit = (employee) => {
-    navigate('/add-employee', { state: { employee } });
-  };
+    setTotalEmployees(employees.length);
+  }, [employees]);
 
   const countByDepartment = {};
   employees.forEach((employee) => {
@@ -43,6 +37,10 @@ const AdminDashboard = () => {
     { title: 'Organization', value: '284', icon: <MessageCircle /> },
     { title: 'Earning', value: '$7,842', icon: <DollarSign /> },
   ];
+
+  const handleEdit = (employee) => {
+    navigate('/add-employee', { state: { employee } });
+  };
 
   const deleteEmployee = (index) => {
     const updatedEmployees = employees.filter((_, empIndex) => empIndex !== index);
@@ -96,13 +94,13 @@ const AdminDashboard = () => {
       );
     }
   };
-  
+
   return (
     <div className="container">
       <div><Toaster position="top-center"/></div>
 
       {/* Main Content */}
-      <div className="main active">
+      <div className={`main ${isNavActive ? 'active' : ''}`}>
         {/* Cards */}
         <div className="cardBox">
           {cardData.map((card, index) => (
